@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Rescue Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .form-title {
+            color: #2c3e50;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        textarea.form-control {
+            height: 120px;
+        }
+        .submit-btn {
+            background-color: #0d6efd;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 10px;
+            /* transition: all 0.3s; */
+        }
+        .submit-btn:hover {
+            background-color: #0b5ed7;
+        }
+        .image-upload-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .required-field::after {
+            content: "*";
+            color: red;
+        }
+        .Optional {
+            color: #6c757d;
+            font-size: 14px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body >
+    <div class="container">
+        <div class="form-container">
+            <h2 class="form-title">Report Injured Animal</h2>
+            
+            <form action="/submit-report" method="POST">
+                <div class="mb-3">
+                    <label for="location" class="form-label required-field">Current Location</label>
+                    <textarea class="form-control" id="location" name="location" rows="3" placeholder="Enter exact address" required></textarea>
+                </div>
+                
+                <div class="image-upload-wrapper">
+                    <label for="animalImage" class="form-label">Animal Image: <span class="Optional">(Optional)</span></label>
+                    <input type="file" class="form-control" id="animalImage" name="image" accept="image/*">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description <span class="Optional">(Optional)</span></label>
+                    <textarea class="form-control" id="description" name="description" rows="4" placeholder="Write about the condition of the animal"></textarea>
+                </div>
+                
+                <button type="submit" class="btn submit-btn">Submit Report</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
