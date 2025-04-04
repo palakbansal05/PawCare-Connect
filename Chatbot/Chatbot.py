@@ -39,12 +39,14 @@ def main():
     unsafe_allow_html=True
     )
 
-
     # Add margin at the top to push the image below the navbar
-    st.markdown("<div style='margin-top: 80px; margin-bottom:0px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-top: 80px; margin-bottom:-10px;'></div>", unsafe_allow_html=True)
 
     # Then show your logo image
     st.image("logo.jpg", width=80)
+    st.markdown("<h1 style='text-align: center; color: #ff7744; margin-top: -10px;'>PawCare-Connect</h1>", unsafe_allow_html=True)
+
+
     # Navbar with buttons
     st.markdown(
     """
@@ -57,8 +59,8 @@ def main():
     """,
     unsafe_allow_html=True
     )
-    st.markdown("<div style='margin-top:0px;></div>", unsafe_allow_html=True)
-    st.title("PawCare-Connect")
+    # st.markdown("<div style='margin-top:-30px;display: flex;flex-direction: column;align-items: center;></div>", unsafe_allow_html=True)
+    # st.title("PawCare-Connect")
 
     if 'messages' not in st.session_state:
         st.session_state.messages = []
@@ -68,7 +70,7 @@ def main():
 
     warning_placeholder=st.empty()
     with warning_placeholder:
-        st.warning("## Linking Hearts,Saving Paws")
+        st.warning("## Linking Hearts , Saving Paws🐾")
 
     prompt = st.chat_input("Ask your questions here")
 
