@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import base64
 
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
@@ -17,9 +18,8 @@ def get_vectorstore():
     embedding_model = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
     db = FAISS.load_local(DB_FAISS_PATH, embedding_model, allow_dangerous_deserialization=True)
     return db
-
-def main():
-    st.set_page_config(page_title="Animal Rescue App", layout="wide")
+def main():  
+    st.set_page_config(page_title="PawCare-Connect", layout="wide")
 
     st.markdown(
     """
@@ -33,18 +33,23 @@ def main():
                          color: white !important; cursor: pointer; transition: background 0.3s ease;display:inline-block;text-decoration:none;
                           align-items:center; }
         .navbar a:hover { background-color: #ff7744; }
-        .main-content { margin-top: 70px; padding:20px; }
-        
+        .main-content { margin-top: 70px; padding:20px; margin-bottom:0px;}    
     </style>
     """,
     unsafe_allow_html=True
     )
 
+
+    # Add margin at the top to push the image below the navbar
+    st.markdown("<div style='margin-top: 80px; margin-bottom:0px;'></div>", unsafe_allow_html=True)
+
+    # Then show your logo image
+    st.image("logo.jpg", width=80)
     # Navbar with buttons
     st.markdown(
     """
     <div class="navbar">
-        <a href="http://127.0.0.1:5000/About_us " target="_blank">About Us</a>
+        <a href="http://127.0.0.1:5000/About_us" target="_blank">About Us</a>
         <a href="http://127.0.0.1:5000/real-timechat" target="_blank">Real-time Chat</a>
         <a href="http://127.0.0.1:5000/report" target="_blank">Report</a>
     </div>
@@ -52,7 +57,7 @@ def main():
     """,
     unsafe_allow_html=True
     )
-
+    st.markdown("<div style='margin-top:0px;></div>", unsafe_allow_html=True)
     st.title("PawCare-Connect")
 
     if 'messages' not in st.session_state:
@@ -62,7 +67,8 @@ def main():
         st.chat_message(message['role']).markdown(message['content'])
 
     warning_placeholder=st.empty()
-    warning_placeholder.warning("## Welcome to The one-stop solution for all the animal rescues")
+    with warning_placeholder:
+        st.warning("## Linking Hearts,Saving Paws")
 
     prompt = st.chat_input("Ask your questions here")
 
@@ -93,7 +99,7 @@ def main():
                 llm=HuggingFaceEndpoint(repo_id=HUGGINGFACE_REPO_ID, temperature=0.5,
                                         model_kwargs={"token": HF_TOKEN, "max_length": "512"}),
                 chain_type="stuff",
-                retriever=vectorstore.as_retriever(search_kwargs={'k': 3}),
+                retriever=vectorstore.as_retriever(search_kwargs={'k': 5}),
                 return_source_documents=True,
                 chain_type_kwargs={'prompt': PromptTemplate(template=CUSTOM_PROMPT_TEMPLATE,
                                                             input_variables=["context", "question"])}
