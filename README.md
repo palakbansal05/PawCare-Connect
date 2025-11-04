@@ -1,4 +1,5 @@
 # PawCare-Connect
+
 PawCare-Connect is a web-based platform designed to support stray animals by providing tools for user interaction, reporting, and awareness. It acts as a bridge between citizens, animal welfare NGOs, and veterinarians by simplifying the way help is requested and delivered. 
 
 ## Problem it Solves
